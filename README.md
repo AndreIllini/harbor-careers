@@ -145,6 +145,18 @@ npx tsc --noEmit # type-check without building
 
 ---
 
+## Backend
+
+The Harbor Careers backend API lives in a separate repo: https://github.com/AndreIllini/harbor-careers-backend
+
+Set VITE_API_URL in your .env to point the frontend at it:
+```
+VITE_API_URL=http://localhost:8000  # local dev
+VITE_API_URL=https://your-backend.onrender.com  # production
+```
+
+---
+
 ## Relationship to Noetherian Ring Capital
 
 Harbor operates under Noetherian Ring Capital LLC. NRC handles buyside finance exclusively (PE, GE, corp dev). Harbor is the same methodology — structured assessment, warm introductions, aligned fee model — extended to every other industry.
