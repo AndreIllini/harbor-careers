@@ -33,6 +33,13 @@ function useFadeIn() {
 const bg = '#0a1628'
 const surface = '#0f1f38'
 
+const advisorPills = [
+  { initials: 'SR', name: 'Sarah R.', specialty: 'Tech & Ops' },
+  { initials: 'MJ', name: 'Marcus J.', specialty: 'Finance & Consulting' },
+  { initials: 'TL', name: 'Tanya L.', specialty: 'Healthcare & Nonprofit' },
+  { initials: 'DK', name: 'David K.', specialty: 'Construction & Legal' },
+]
+
 const tiers = [
   {
     label: 'Resume Review',
@@ -120,6 +127,7 @@ const faqs = [
 
 export default function Services() {
   useEffect(() => { document.title = 'Services | Harbor' }, [])
+  const advisorMatchRef = useFadeIn()
   const tiersRef = useFadeIn()
   const faqRef = useFadeIn()
   const [openFaq, setOpenFaq] = useState<number | null>(null)
@@ -143,6 +151,60 @@ export default function Services() {
           <p style={{ color: 'rgba(255,255,255,0.28)', fontSize: '13px', margin: 0 }}>
             Questions? Email <a href="mailto:hello@harborcareers.com" style={{ color: 'rgba(79,142,247,0.7)', textDecoration: 'none' }}>hello@harborcareers.com</a> — we'll tell you honestly which service fits.
           </p>
+        </div>
+      </section>
+
+      {/* ADVISOR MATCH */}
+      <section style={{ padding: '4rem 2rem 0' }}>
+        <div ref={advisorMatchRef} style={{ maxWidth: '1100px', margin: '0 auto', opacity: 0, transform: 'translateY(24px)', transition: 'opacity 0.7s ease, transform 0.7s ease' }}>
+          <div style={{
+            backgroundColor: surface,
+            borderLeft: '3px solid #4f8ef7',
+            borderTop: '1px solid rgba(255,255,255,0.08)',
+            borderRight: '1px solid rgba(255,255,255,0.08)',
+            borderBottom: '1px solid rgba(255,255,255,0.08)',
+            borderRadius: '10px',
+            padding: '2.5rem',
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr',
+            gap: '3rem',
+            alignItems: 'center',
+          }}>
+            {/* Left: copy */}
+            <div>
+              <div style={{ fontSize: '10px', fontWeight: 700, color: 'rgba(255,255,255,0.3)', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>Human review, matched to your industry</div>
+              <h2 style={{ fontSize: 'clamp(1.2rem, 2.5vw, 1.6rem)', fontWeight: 800, color: '#ffffff', margin: '0 0 1rem', letterSpacing: '-0.02em', lineHeight: 1.25 }}>
+                Your review is done by a person who has worked in your industry.
+              </h2>
+              <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '14px', lineHeight: 1.8, margin: 0 }}>
+                Every resume review is performed by a hiring professional with direct experience in your target industry. We match you to an advisor before we start.
+              </p>
+            </div>
+
+            {/* Right: advisor pills 2×2 */}
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
+              {advisorPills.map((a, i) => (
+                <div key={i} style={{
+                  display: 'flex', alignItems: 'center', gap: '10px',
+                  backgroundColor: 'rgba(255,255,255,0.04)',
+                  border: '1px solid rgba(255,255,255,0.07)',
+                  borderRadius: '8px', padding: '0.75rem 1rem',
+                }}>
+                  <div style={{
+                    width: '36px', height: '36px', borderRadius: '50%', flexShrink: 0,
+                    backgroundColor: 'rgba(79,142,247,0.15)', border: '1.5px solid rgba(79,142,247,0.35)',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  }}>
+                    <span style={{ fontSize: '11px', fontWeight: 800, color: '#4f8ef7' }}>{a.initials}</span>
+                  </div>
+                  <div>
+                    <div style={{ fontSize: '13px', fontWeight: 700, color: '#ffffff', lineHeight: 1.2 }}>{a.name}</div>
+                    <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.38)', marginTop: '2px' }}>{a.specialty}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 

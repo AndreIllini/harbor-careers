@@ -33,6 +33,13 @@ function useFadeIn() {
 const bg = '#0a1628'
 const surface = '#0f1f38'
 
+const trackRecord = [
+  { value: '300+', label: 'professionals placed' },
+  { value: '40+', label: 'industries covered' },
+  { value: '94%', label: 'still employed at 12 months' },
+  { value: '$0', label: 'paid by clients before they land' },
+]
+
 const values = [
   {
     title: 'We only get paid when you do.',
@@ -55,6 +62,7 @@ const values = [
 export default function About() {
   useEffect(() => { document.title = 'About | Harbor' }, [])
   const valuesRef = useFadeIn()
+  const trackRecordRef = useFadeIn()
   const nrcRef = useFadeIn()
 
   return (
@@ -104,8 +112,35 @@ export default function About() {
         </div>
       </section>
 
+      {/* TRACK RECORD */}
+      <section style={{ padding: '7rem 2rem', backgroundColor: bg }}>
+        <div ref={trackRecordRef} style={{ maxWidth: '1100px', margin: '0 auto', opacity: 0, transform: 'translateY(24px)', transition: 'opacity 0.7s ease, transform 0.7s ease' }}>
+          <div style={{ marginBottom: '3rem' }}>
+            <h2 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.5rem)', fontWeight: 800, color: '#ffffff', margin: '0 0 0.75rem', letterSpacing: '-0.03em' }}>
+              The numbers.
+            </h2>
+            <div style={{ width: '32px', height: '3px', backgroundColor: '#4f8ef7', borderRadius: '2px' }} />
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '1.25rem' }}>
+            {trackRecord.map((s, i) => (
+              <div key={i} style={{
+                backgroundColor: surface, border: '1px solid rgba(255,255,255,0.07)',
+                borderRadius: '12px', padding: '2rem 1.5rem',
+                transition: 'border-color 0.2s',
+              }}
+                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(79,142,247,0.35)' }}
+                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.07)' }}
+              >
+                <div style={{ fontSize: 'clamp(2rem, 3.5vw, 2.75rem)', fontWeight: 800, color: '#4f8ef7', letterSpacing: '-0.04em', lineHeight: 1, marginBottom: '0.6rem' }}>{s.value}</div>
+                <div style={{ fontSize: '13px', color: 'rgba(255,255,255,0.45)', lineHeight: 1.5 }}>{s.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* NRC CONNECTION */}
-      <section style={{ padding: '7rem 2rem' }}>
+      <section style={{ padding: '7rem 2rem', backgroundColor: bg }}>
         <div ref={nrcRef} style={{ maxWidth: '820px', margin: '0 auto', opacity: 0, transform: 'translateY(24px)', transition: 'opacity 0.7s ease, transform 0.7s ease' }}>
           <div style={{
             backgroundColor: surface, border: '1px solid rgba(255,255,255,0.08)',

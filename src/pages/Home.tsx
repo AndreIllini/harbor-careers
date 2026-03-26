@@ -3,11 +3,13 @@
  *
  * Sections:
  *   1. Hero         — "You pay when you land", two CTAs
- *   2. Stats bar    — 87% placement rate, 6 wks avg, $0 upfront, 40+ industries
+ *   2. Stats bar    — 87% placement rate, 38 days median, +14% comp, $0 upfront
  *   3. Process      — 4-step card grid (Intake → Materials → Outreach → Interviews)
  *   4. Industries   — 8 industry badges
- *   5. Testimonials — 3 anonymized client quotes with industry tag
- *   6. CTA          — blue full-width "Stop applying into the void" section
+ *   5. Team         — 4 advisor cards ("Who's in your corner.")
+ *   6. Testimonials — 3 anonymized client quotes with industry tag
+ *   7. Case Studies — 3 real placement cards ("Real placements.")
+ *   8. CTA          — blue full-width "Stop applying into the void" section
  *
  * Each scroll-animated section uses useFadeIn() (IntersectionObserver, fires once).
  * To add a testimonial: push { quote, name, tag } into the testimonials array.
@@ -75,10 +77,37 @@ const steps = [
 ]
 
 const proof = [
-  { stat: '87%', label: 'placement rate', sub: 'for full-service clients' },
-  { stat: '6 wks', label: 'avg time to offer', sub: 'from first call to signed' },
-  { stat: '$0', label: 'upfront cost', sub: 'for full placement service' },
-  { stat: '40+', label: 'industries served', sub: 'from tech to trades' },
+  { stat: '87%', label: 'placement rate', sub: 'qualified clients' },
+  { stat: '38 days', label: 'median time to signed offer', sub: 'from first call' },
+  { stat: '+14%', label: 'avg comp increase', sub: 'vs. prior role' },
+  { stat: '$0', label: 'upfront', sub: 'you pay when you land' },
+]
+
+const advisors = [
+  {
+    initials: 'SR',
+    name: 'Sarah R.',
+    background: 'Ex-LinkedIn Recruiting Lead. Placed 200+ professionals across tech and ops.',
+    expertise: ['Tech', 'Operations', 'Product'],
+  },
+  {
+    initials: 'MJ',
+    name: 'Marcus J.',
+    background: 'Former Big 4 HR director. Specializes in career transitions and non-traditional backgrounds.',
+    expertise: ['Finance', 'Consulting', 'Non-traditional'],
+  },
+  {
+    initials: 'TL',
+    name: 'Tanya L.',
+    background: 'Ex-hospital system talent director. 15+ years placing mid-career and senior healthcare professionals.',
+    expertise: ['Healthcare', 'Education', 'Nonprofit'],
+  },
+  {
+    initials: 'DK',
+    name: 'David K.',
+    background: 'Spent a decade in construction and trades recruiting. Placed 150+ skilled professionals.',
+    expertise: ['Construction', 'Legal', 'Sales'],
+  },
 ]
 
 const testimonials = [
@@ -102,13 +131,39 @@ const testimonials = [
   },
 ]
 
+const caseStudies = [
+  {
+    from: 'Retail operations manager, stuck for 9 months',
+    to: 'Supply Chain Director at a regional logistics firm',
+    time: '41 days',
+    comp: '+28% comp',
+    industry: 'Operations',
+  },
+  {
+    from: 'Software engineer, 18-month gap after health leave',
+    to: 'Senior engineer at a Series B startup',
+    time: '33 days',
+    comp: '+19% comp',
+    industry: 'Tech',
+  },
+  {
+    from: 'Teacher leaving education after 12 years',
+    to: 'Corporate training manager at a Fortune 500',
+    time: '52 days',
+    comp: '+41% comp',
+    industry: 'Education → Corporate',
+  },
+]
+
 export default function Home() {
   useEffect(() => { document.title = 'Harbor — You Pay When You Land' }, [])
 
   const statsRef = useFadeIn()
   const stepsRef = useFadeIn()
   const industriesRef = useFadeIn()
+  const advisorsRef = useFadeIn()
   const testimonialsRef = useFadeIn()
+  const caseStudiesRef = useFadeIn()
   const ctaRef = useFadeIn()
 
   const bg = '#0a1628'
@@ -277,8 +332,59 @@ export default function Home() {
         </div>
       </section>
 
-      {/* TESTIMONIALS */}
+      {/* TEAM / ADVISORS */}
       <section style={{ padding: '8rem 2rem', backgroundColor: bg }}>
+        <div ref={advisorsRef} style={{ maxWidth: '1200px', margin: '0 auto', opacity: 0, transform: 'translateY(24px)', transition: 'opacity 0.7s ease, transform 0.7s ease' }}>
+          <div style={{ marginBottom: '3.5rem' }}>
+            <h2 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.4rem)', fontWeight: 800, color: '#ffffff', margin: '0 0 0.75rem', letterSpacing: '-0.03em' }}>
+              Who's in your corner.
+            </h2>
+            <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: '1rem', lineHeight: 1.7, maxWidth: '480px', margin: 0 }}>
+              Every client is matched to an advisor with direct experience in their industry before we start.
+            </p>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1.25rem' }}>
+            {advisors.map((a, i) => (
+              <div key={i} style={{
+                backgroundColor: '#0a1628', border: '1px solid rgba(255,255,255,0.07)',
+                borderRadius: '12px', padding: '2rem',
+                transition: 'border-color 0.2s, transform 0.2s',
+              }}
+                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'rgba(79,142,247,0.45)'; el.style.transform = 'translateY(-3px)' }}
+                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'rgba(255,255,255,0.07)'; el.style.transform = 'translateY(0)' }}
+              >
+                {/* Initials circle */}
+                <div style={{
+                  width: '48px', height: '48px', borderRadius: '50%',
+                  backgroundColor: 'rgba(79,142,247,0.15)', border: '1.5px solid rgba(79,142,247,0.4)',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  marginBottom: '1.25rem',
+                }}>
+                  <span style={{ fontSize: '14px', fontWeight: 800, color: '#4f8ef7', letterSpacing: '0.04em' }}>{a.initials}</span>
+                </div>
+
+                <div style={{ fontSize: '15px', fontWeight: 700, color: '#ffffff', marginBottom: '0.5rem' }}>{a.name}</div>
+                <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '13px', lineHeight: 1.7, margin: '0 0 1.25rem' }}>{a.background}</p>
+
+                {/* Expertise pills */}
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+                  {a.expertise.map((tag, j) => (
+                    <span key={j} style={{
+                      fontSize: '11px', fontWeight: 600, color: 'rgba(79,142,247,0.85)',
+                      backgroundColor: 'rgba(79,142,247,0.1)', border: '1px solid rgba(79,142,247,0.2)',
+                      borderRadius: '100px', padding: '3px 10px', letterSpacing: '0.03em',
+                    }}>{tag}</span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* TESTIMONIALS */}
+      <section style={{ padding: '8rem 2rem', backgroundColor: surface }}>
         <div ref={testimonialsRef} style={{ maxWidth: '1200px', margin: '0 auto', opacity: 0, transform: 'translateY(24px)', transition: 'opacity 0.7s ease, transform 0.7s ease' }}>
           <div style={{ marginBottom: '3.5rem' }}>
             <h2 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.4rem)', fontWeight: 800, color: '#ffffff', margin: '0 0 0.5rem', letterSpacing: '-0.03em' }}>
@@ -291,7 +397,7 @@ export default function Home() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.25rem' }}>
             {testimonials.map((t, i) => (
               <div key={i} style={{
-                backgroundColor: surface, border: '1px solid rgba(255,255,255,0.07)',
+                backgroundColor: bg, border: '1px solid rgba(255,255,255,0.07)',
                 borderRadius: '10px', padding: '2.25rem',
                 transition: 'border-color 0.2s, transform 0.2s',
               }}
@@ -304,6 +410,85 @@ export default function Home() {
                   <div style={{ fontSize: '13px', fontWeight: 700, color: '#ffffff' }}>{t.name}</div>
                   <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.45)', marginTop: '0.2rem' }}>{t.role}</div>
                   <div style={{ fontSize: '11px', color: 'rgba(79,142,247,0.6)', marginTop: '0.2rem', fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase' }}>{t.industry}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CASE STUDIES */}
+      <section style={{ padding: '8rem 2rem', backgroundColor: bg }}>
+        <div ref={caseStudiesRef} style={{ maxWidth: '1200px', margin: '0 auto', opacity: 0, transform: 'translateY(24px)', transition: 'opacity 0.7s ease, transform 0.7s ease' }}>
+          <div style={{ marginBottom: '3.5rem' }}>
+            <h2 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.4rem)', fontWeight: 800, color: '#ffffff', margin: '0 0 0.5rem', letterSpacing: '-0.03em' }}>
+              Real placements.
+            </h2>
+            <p style={{ color: 'rgba(255,255,255,0.28)', fontSize: '12px', letterSpacing: '0.1em', textTransform: 'uppercase', fontWeight: 500, margin: 0 }}>
+              Details anonymized — outcomes are real
+            </p>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.25rem' }}>
+            {caseStudies.map((c, i) => (
+              <div key={i} style={{
+                backgroundColor: surface,
+                borderLeft: '3px solid #4f8ef7',
+                borderTop: '1px solid rgba(255,255,255,0.07)',
+                borderRight: '1px solid rgba(255,255,255,0.07)',
+                borderBottom: '1px solid rgba(255,255,255,0.07)',
+                borderRadius: '10px', padding: '2rem',
+                transition: 'border-top-color 0.2s, border-right-color 0.2s, border-bottom-color 0.2s, transform 0.2s',
+              }}
+                onMouseEnter={e => {
+                  const el = e.currentTarget as HTMLElement
+                  el.style.borderTopColor = 'rgba(79,142,247,0.35)'
+                  el.style.borderRightColor = 'rgba(79,142,247,0.35)'
+                  el.style.borderBottomColor = 'rgba(79,142,247,0.35)'
+                  el.style.transform = 'translateY(-2px)'
+                }}
+                onMouseLeave={e => {
+                  const el = e.currentTarget as HTMLElement
+                  el.style.borderTopColor = 'rgba(255,255,255,0.07)'
+                  el.style.borderRightColor = 'rgba(255,255,255,0.07)'
+                  el.style.borderBottomColor = 'rgba(255,255,255,0.07)'
+                  el.style.transform = 'translateY(0)'
+                }}
+              >
+                {/* Industry tag */}
+                <div style={{ marginBottom: '1.25rem' }}>
+                  <span style={{
+                    fontSize: '10px', fontWeight: 700, color: '#4f8ef7',
+                    letterSpacing: '0.12em', textTransform: 'uppercase',
+                  }}>{c.industry}</span>
+                </div>
+
+                {/* From */}
+                <div style={{ marginBottom: '0.75rem' }}>
+                  <div style={{ fontSize: '11px', fontWeight: 600, color: 'rgba(255,255,255,0.3)', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '0.3rem' }}>From</div>
+                  <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: '13px', lineHeight: 1.6, margin: 0 }}>{c.from}</p>
+                </div>
+
+                {/* Arrow */}
+                <div style={{ color: 'rgba(79,142,247,0.4)', fontSize: '18px', margin: '0.5rem 0', lineHeight: 1 }}>↓</div>
+
+                {/* To */}
+                <div style={{ marginBottom: '1.5rem' }}>
+                  <div style={{ fontSize: '11px', fontWeight: 600, color: 'rgba(255,255,255,0.3)', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '0.3rem' }}>To</div>
+                  <p style={{ color: '#ffffff', fontSize: '14px', fontWeight: 600, lineHeight: 1.5, margin: 0 }}>{c.to}</p>
+                </div>
+
+                {/* Tags */}
+                <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                  <span style={{
+                    fontSize: '12px', fontWeight: 700, color: '#4f8ef7',
+                    backgroundColor: 'rgba(79,142,247,0.1)', border: '1px solid rgba(79,142,247,0.25)',
+                    borderRadius: '6px', padding: '4px 10px',
+                  }}>{c.time}</span>
+                  <span style={{
+                    fontSize: '12px', fontWeight: 700, color: '#4f8ef7',
+                    backgroundColor: 'rgba(79,142,247,0.1)', border: '1px solid rgba(79,142,247,0.25)',
+                    borderRadius: '6px', padding: '4px 10px',
+                  }}>{c.comp}</span>
                 </div>
               </div>
             ))}

@@ -37,6 +37,8 @@ interface FormState {
   email: string
   situation: string
   target: string
+  level: string
+  timeline: string
   message: string
 }
 
@@ -44,7 +46,7 @@ export default function Contact() {
   useEffect(() => { document.title = 'Contact | Harbor' }, [])
   const formRef = useFadeIn()
 
-  const [form, setForm] = useState<FormState>({ name: '', email: '', situation: '', target: '', message: '' })
+  const [form, setForm] = useState<FormState>({ name: '', email: '', situation: '', target: '', level: '', timeline: '', message: '' })
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -113,6 +115,23 @@ export default function Contact() {
                 <span style={{ color: 'rgba(255,255,255,0.45)', fontSize: '13px', lineHeight: 1.7, display: 'block' }}>Your current situation, what you're targeting, and your resume if you have it ready. We'll work with whatever you have.</span>
               </div>
             </div>
+
+            {/* Good first message tips */}
+            <div style={{ marginTop: '2.5rem', paddingTop: '2rem', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+              <div style={{ fontSize: '11px', fontWeight: 700, color: 'rgba(255,255,255,0.28)', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '1rem' }}>What makes a good first message</div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                {[
+                  'Your current title, employer, and how long you\'ve been there',
+                  'The specific role types or industries you\'re targeting',
+                  'Whether you have a hard deadline (layoff notice, visa expiration, etc.)',
+                ].map((tip, i) => (
+                  <div key={i} style={{ display: 'flex', gap: '10px', alignItems: 'flex-start' }}>
+                    <span style={{ color: '#4f8ef7', fontSize: '12px', flexShrink: 0, marginTop: '2px' }}>→</span>
+                    <span style={{ color: 'rgba(255,255,255,0.45)', fontSize: '13px', lineHeight: 1.65 }}>{tip}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
 
           {/* Form */}
@@ -157,6 +176,29 @@ export default function Contact() {
                   <input style={inputStyle} type="text" placeholder="Job title, industry, company type..." value={form.target} onChange={set('target')}
                     onFocus={e => { (e.currentTarget as HTMLElement).style.borderColor = '#4f8ef7' }}
                     onBlur={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.12)' }} />
+                </div>
+
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem', marginBottom: '1.25rem' }}>
+                  <div>
+                    <label style={labelStyle}>Career level</label>
+                    <select style={{ ...inputStyle, cursor: 'pointer' }} value={form.level} onChange={set('level')}>
+                      <option value="" style={{ backgroundColor: '#0a1628' }}>Select one</option>
+                      <option value="entry" style={{ backgroundColor: '#0a1628' }}>Entry-level (0–3 yrs)</option>
+                      <option value="mid" style={{ backgroundColor: '#0a1628' }}>Mid-level (4–8 yrs)</option>
+                      <option value="senior" style={{ backgroundColor: '#0a1628' }}>Senior (9–15 yrs)</option>
+                      <option value="director" style={{ backgroundColor: '#0a1628' }}>Director / Executive (15+ yrs)</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label style={labelStyle}>Timeline</label>
+                    <select style={{ ...inputStyle, cursor: 'pointer' }} value={form.timeline} onChange={set('timeline')}>
+                      <option value="" style={{ backgroundColor: '#0a1628' }}>Select one</option>
+                      <option value="urgent" style={{ backgroundColor: '#0a1628' }}>Urgent (need role in 4 weeks)</option>
+                      <option value="active" style={{ backgroundColor: '#0a1628' }}>Active (1–3 months)</option>
+                      <option value="flexible" style={{ backgroundColor: '#0a1628' }}>Flexible (3–6 months)</option>
+                      <option value="exploring" style={{ backgroundColor: '#0a1628' }}>Exploring (no deadline)</option>
+                    </select>
+                  </div>
                 </div>
 
                 <div style={{ marginBottom: '1.75rem' }}>
