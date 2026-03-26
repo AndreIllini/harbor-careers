@@ -1,3 +1,15 @@
+/**
+ * Contact.tsx — Intake form page (/contact)
+ *
+ * 2-column layout: info left, form right.
+ * Form fields: name, email (required), situation (dropdown), target, message.
+ *
+ * Submission: POST JSON to Formspree.
+ *   Replace endpoint: https://formspree.io/f/<YOUR_FORM_ID>
+ *   Current value is a placeholder — update before going live.
+ *
+ * State: form (values), submitting (bool), submitted (bool), error (string|null)
+ */
 import { useEffect, useRef, useState } from 'react'
 
 function useFadeIn() {

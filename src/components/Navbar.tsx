@@ -1,3 +1,22 @@
+/**
+ * Navbar.tsx — Fixed top navigation bar
+ *
+ * Behavior:
+ *   - Transparent at the top of the page; frosted-glass (backdrop-filter blur)
+ *     with a subtle border once the user scrolls past 20px
+ *   - Mobile hamburger menu (≤767px) collapses into a full-width dropdown
+ *   - Active link gets a white underline indicator
+ *   - Menu auto-closes on route change (via location effect)
+ *
+ * To add a nav link:
+ *   Push an object { label, to } into the navLinks array.
+ *   Also add the link to Footer.tsx for consistency.
+ *
+ * Brand mark:
+ *   SVG anchor — circle + vertical staff + horizontal crossbar + top circle.
+ *   Keep in sync with public/favicon.svg.
+ */
+
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 

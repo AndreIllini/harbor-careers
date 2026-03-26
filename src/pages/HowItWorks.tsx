@@ -1,3 +1,16 @@
+/**
+ * HowItWorks.tsx — Process page (/how-it-works)
+ *
+ * Sections:
+ *   1. Hero      — intro
+ *   2. Process   — 5-step vertical timeline from `fullProcess` array
+ *   3. Who for   — 6-cell grid from `whoFor` array
+ *   4. CTA       — links to /services
+ *
+ * Timeline: numbered circles (01-05) connected by vertical lines.
+ * Line omitted after last step via i < fullProcess.length - 1 guard.
+ * To add a step: push { num, time, title, body, detail } to fullProcess.
+ */
 import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 

@@ -1,3 +1,18 @@
+/**
+ * Home.tsx — Landing page (/)
+ *
+ * Sections:
+ *   1. Hero         — "You pay when you land", two CTAs
+ *   2. Stats bar    — 87% placement rate, 6 wks avg, $0 upfront, 40+ industries
+ *   3. Process      — 4-step card grid (Intake → Materials → Outreach → Interviews)
+ *   4. Industries   — 8 industry badges
+ *   5. Testimonials — 3 anonymized client quotes with industry tag
+ *   6. CTA          — blue full-width "Stop applying into the void" section
+ *
+ * Each scroll-animated section uses useFadeIn() (IntersectionObserver, fires once).
+ * To add a testimonial: push { quote, name, tag } into the testimonials array.
+ * To add an industry: push a string into the industries array.
+ */
 import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 

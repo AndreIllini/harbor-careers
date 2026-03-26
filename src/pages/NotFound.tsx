@@ -1,3 +1,9 @@
+/**
+ * NotFound.tsx — 404 page (catch-all route *)
+ *
+ * Shown for any unmatched route. vercel.json rewrites all paths to index.html
+ * so React Router handles 404s client-side (no Vercel 404 page).
+ */
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 

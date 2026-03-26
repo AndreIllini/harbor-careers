@@ -1,3 +1,20 @@
+/**
+ * Footer.tsx — Site footer
+ *
+ * Four-column grid (collapses to 2 on small screens via auto-fit):
+ *   1. Brand — anchor mark, tagline, NRC attribution
+ *   2. Navigate — all main routes
+ *   3. Services — pricing tier quick links to /services
+ *   4. Contact — email + location
+ *
+ * Bottom bar:
+ *   - Auto-updating copyright year via new Date().getFullYear()
+ *   - NRC sister brand attribution with link to noetherianring.com
+ *
+ * To update service tiers listed here, edit the array in the Services column.
+ * Keep in sync with the tiers array in src/pages/Services.tsx.
+ */
+
 import { Link } from 'react-router-dom'
 
 const Footer = () => {

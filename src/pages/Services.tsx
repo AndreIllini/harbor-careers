@@ -1,3 +1,15 @@
+/**
+ * Services.tsx — Pricing page (/services)
+ *
+ * Tiers (edit the `tiers` array to update):
+ *   - Resume Review   $149 one-time, 48hr turnaround
+ *   - Career Sprint   $499 one-time, 2 coaching calls (Most Popular)
+ *   - Full Placement  15% of first-year comp, paid at offer only
+ *
+ * Each tier.href is a mailto: link — swap for Stripe/Calendly when ready.
+ * FAQ: openFaq tracks open accordion item (null = all closed).
+ * Max-height CSS animation for smooth expand/collapse.
+ */
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 

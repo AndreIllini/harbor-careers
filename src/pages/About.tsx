@@ -1,3 +1,15 @@
+/**
+ * About.tsx — About page (/about)
+ *
+ * Sections:
+ *   1. Hero        — "The job market is broken for most people"
+ *   2. Values grid — 4 operating principles from `values` array
+ *   3. NRC card    — sister brand relationship + link to noetherianring.com
+ *   4. CTA         — blue section linking to /services
+ *
+ * Two separate useFadeIn() refs so values and NRC sections animate independently.
+ * To update principles: edit the `values` array (title + body).
+ */
 import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 
