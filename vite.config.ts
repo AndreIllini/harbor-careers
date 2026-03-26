@@ -22,7 +22,11 @@ export default defineConfig({
     rollupOptions: {
       output: {
         // vendor chunk: React libs rarely change → browser caches them across deploys
-        manualChunks: { vendor: ['react', 'react-dom', 'react-router-dom'] },
+        manualChunks: (id: string) =>
+          id.includes('node_modules') &&
+          ['react', 'react-dom', 'react-router-dom'].some(lib => id.includes(lib))
+            ? 'vendor'
+            : undefined,
       },
     },
   },
