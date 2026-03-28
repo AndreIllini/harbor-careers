@@ -96,9 +96,20 @@ const Footer = () => {
           <p style={{ color: 'rgba(255,255,255,0.15)', fontSize: '12px', margin: 0 }}>
             &copy; {new Date().getFullYear()} Harbor Careers. All rights reserved.
           </p>
-          <p style={{ color: 'rgba(255,255,255,0.12)', fontSize: '11px', margin: 0 }}>
-            Sister brand of <a href="https://noetherianring.com" style={{ color: 'rgba(255,255,255,0.22)', textDecoration: 'none' }}>Noetherian Ring Capital</a> — buyside finance recruiting
-          </p>
+          <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
+            {[
+              { label: 'Noetherian Ring Capital', url: 'https://noetherianring.com' },
+              { label: 'Tranche', url: 'https://tranche.co' },
+              { label: 'Parallax', url: 'https://parallax.io' },
+            ].map(b => (
+              <a key={b.label} href={b.url} target="_blank" rel="noopener noreferrer"
+                style={{ color: 'rgba(255,255,255,0.18)', fontSize: '11px', textDecoration: 'none', transition: 'color 0.15s' }}
+                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.45)' }}
+                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.18)' }}>
+                {b.label}
+              </a>
+            ))}
+          </div>
         </div>
       </div>
     </footer>

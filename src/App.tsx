@@ -9,7 +9,8 @@
  *   /how-it-works  → HowItWorks (5-step process + who it's for)
  *   /services      → Services (pricing tiers + FAQ)
  *   /about         → About (mission, values, NRC connection)
- *   /contact       → Contact (Formspree intake form)
+ *   /contact       → Contact (intake form — Harbor backend with Formspree fallback)
+ *   /resume-check  → ResumeCheck (free resume analysis lead magnet)
  *   *              → NotFound (404)
  *
  * To add a new page:
@@ -27,6 +28,7 @@ import HowItWorks from './pages/HowItWorks'
 import Services from './pages/Services'
 import About from './pages/About'
 import Contact from './pages/Contact'
+import ResumeCheck from './pages/ResumeCheck'
 import NotFound from './pages/NotFound'
 
 function App() {
@@ -43,6 +45,7 @@ function App() {
             <Route path="/services" element={<Services />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/resume-check" element={<ResumeCheck />} />
             {/* Catch-all — must be last */}
             <Route path="*" element={<NotFound />} />
           </Routes>

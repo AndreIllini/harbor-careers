@@ -267,6 +267,16 @@ export default function Services() {
                 >
                   {tier.cta}
                 </a>
+                {tier.label === 'Resume Review' && (
+                  <div style={{ textAlign: 'center', marginTop: '0.9rem' }}>
+                    <Link to="/resume-check" style={{ color: 'rgba(79,142,247,0.7)', fontSize: '12px', textDecoration: 'none', transition: 'color 0.15s' }}
+                      onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = '#4f8ef7' }}
+                      onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'rgba(79,142,247,0.7)' }}
+                    >
+                      Start with a free resume check →
+                    </Link>
+                  </div>
+                )}
               </div>
             ))}
           </div>

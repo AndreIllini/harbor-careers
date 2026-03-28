@@ -11,6 +11,10 @@
  * State: form (values), submitting (bool), submitted (bool), error (string|null)
  */
 import { useEffect, useRef, useState } from 'react'
+import { api } from '../lib/api'
+
+// TODO: Register this form ID at https://formspree.io and replace the ID below.
+const FORMSPREE_FALLBACK_URL = 'https://formspree.io/f/xpwzgqvb'
 
 function useFadeIn() {
   const ref = useRef<HTMLDivElement>(null)
@@ -59,15 +63,22 @@ export default function Contact() {
     setSubmitting(true)
     setError(null)
     try {
-      const res = await fetch('https://formspree.io/f/hello@harborcareers.com', {
-        method: 'POST',
-        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
-      })
-      if (res.ok) { setSubmitted(true) }
-      else { setError('Something went wrong. Email us directly at hello@harborcareers.com') }
+      await api.submitIntake(form)
+      setSubmitted(true)
     } catch {
-      setError('Unable to send. Email us at hello@harborcareers.com')
+      // Backend unreachable — fall back to Formspree
+      console.warn('Harbor backend unreachable, falling back to Formspree.')
+      try {
+        const res = await fetch(FORMSPREE_FALLBACK_URL, {
+          method: 'POST',
+          headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+          body: JSON.stringify(form),
+        })
+        if (res.ok) { setSubmitted(true) }
+        else { setError('Something went wrong. Email us directly at hello@harborcareers.com') }
+      } catch {
+        setError('Unable to send. Email us at hello@harborcareers.com')
+      }
     } finally {
       setSubmitting(false)
     }

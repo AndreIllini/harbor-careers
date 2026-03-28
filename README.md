@@ -157,13 +157,16 @@ VITE_API_URL=https://your-backend.onrender.com  # production
 
 ---
 
-## Relationship to Noetherian Ring Capital
+## NRC Brand Family
 
-Harbor operates under Noetherian Ring Capital LLC. NRC handles buyside finance exclusively (PE, GE, corp dev). Harbor is the same methodology — structured assessment, warm introductions, aligned fee model — extended to every other industry.
+All four brands operate under Noetherian Ring Capital LLC:
 
-Both brands share the same visual language (dark navy, clean type, white-on-dark) but use different marks: NRC uses a ring mark, Harbor uses an anchor mark.
-
-NRC repo: https://github.com/AndreIllini/noetherian-ring-capital
+| Brand | Repo | Focus |
+|---|---|---|
+| **Noetherian Ring Capital** | [noetherian-ring-capital](https://github.com/AndreIllini/noetherian-ring-capital) | Buyside finance recruiting |
+| **Harbor Careers** | [harbor-careers](https://github.com/AndreIllini/harbor-careers) | Broad-market placement |
+| **Tranche** | [tranche](https://github.com/AndreIllini/tranche) | AI workforce outsourcing |
+| **Parallax** | [parallax](https://github.com/AndreIllini/parallax) | Global workforce intelligence |
 
 ---
 

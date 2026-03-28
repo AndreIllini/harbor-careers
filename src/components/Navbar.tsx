@@ -35,6 +35,7 @@ const Navbar = () => {
 
   const navLinks = [
     { label: 'How It Works', to: '/how-it-works' },
+    { label: 'Free Resume Check', to: '/resume-check' },
     { label: 'Services', to: '/services' },
     { label: 'About', to: '/about' },
   ]
